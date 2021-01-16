@@ -61,6 +61,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Auth } from 'aws-amplify';
 export default Vue.extend({
   name: 'NavBar',
   data: () => ({
@@ -94,10 +95,8 @@ export default Vue.extend({
     ]
   }),
   methods: {
-    Logout() {
-      this.$router.push('/')
-      console.log('Logout user');
-      
+    async Logout() {
+      console.log('logging out');
     }
   }
 });

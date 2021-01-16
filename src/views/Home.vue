@@ -10,9 +10,6 @@
     <div>
       Loaded data will be kept in store to prevent request exhaustion
     </div>
-    <div>
-      This page will have to be authenticated
-    </div>
   </div>
 </template>
 

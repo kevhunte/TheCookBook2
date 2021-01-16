@@ -10,6 +10,11 @@
       "StackName": "amplify-thecookbook-dev-190516",
       "StackId": "arn:aws:cloudformation:us-east-1:118873177626:stack/amplify-thecookbook-dev-190516/2facdeb0-55fc-11eb-a5f2-0a35f6ddac11",
       "AmplifyAppId": "d1i9x4fowqspxc"
+    },
+    "categories": {
+      "auth": {
+        "thecookbook5b2dc3bb": {}
+      }
     }
   }
 }
