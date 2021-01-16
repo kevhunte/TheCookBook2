@@ -46,8 +46,4 @@ export default Vue.extend({
   min-height: 1700px;
 }
 
-/* .link-style{
-  text-decoration: none;
-} */
-
 </style>

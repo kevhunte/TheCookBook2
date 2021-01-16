@@ -12,6 +12,8 @@ export const auth = {
     },
     actions: {
         async logout({commit}: any){
+            console.log('logging out...');
+            
             commit("setUser",null)
             return await Auth.signOut({global: true});
         },

@@ -24,7 +24,10 @@
         <strong class="white--text">Search</strong>
       </router-link>
 
-      <v-menu offset-y>
+      <v-menu 
+      offset-y
+      :disabled="!$store.getters['auth/user']"
+      >
         <template v-slot:activator="{ on, attrs }">
           <v-icon 
             large
@@ -42,7 +45,7 @@
               :key="index"
               @click="() => {
                 if(item.title === 'Logout')
-                    Logout() 
+                    logout()
                 else if($route.path !==item.link)
                     $router.push(item.link)
                 }"
@@ -60,10 +63,15 @@
 </template>
 
 <script lang="ts">
+import store from '@/store';
 import Vue from 'vue';
-import { Auth } from 'aws-amplify';
+import {mapActions} from 'vuex';
 export default Vue.extend({
   name: 'NavBar',
+  mounted: () =>{
+    console.log('vals - ', store.getters['auth/user'])
+    
+  },
   data: () => ({
     selectedItem: null,
     menu_items: [
@@ -95,9 +103,7 @@ export default Vue.extend({
     ]
   }),
   methods: {
-    async Logout() {
-      console.log('logging out');
-    }
+    ...mapActions("auth",["logout"])
   }
 });
 </script>
