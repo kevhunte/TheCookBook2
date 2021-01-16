@@ -14,13 +14,20 @@
 <script lang="ts">
 import Vue from 'vue';
 import NavBar from '@/components/NavBar.vue'
+import {mapActions} from 'vuex';
 export default Vue.extend({
   name: 'App',
   components: {
     NavBar
   },
+  mounted(){
+    // persists login info on app load
+    this.authAction()
+  },
   data: () => ({}),
-  methods: {}
+  methods: {
+    ...mapActions("auth",["authAction"])
+  }
 });
 </script>
 

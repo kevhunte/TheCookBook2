@@ -1,3 +1,4 @@
+import { Auth } from 'aws-amplify';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
@@ -9,6 +10,7 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {requiresAuth: true}
   },
   {
     path: '/login',
@@ -24,26 +26,31 @@ const routes: Array<RouteConfig> = [
     path: '/search',
     name: 'Search',
     component: () => import('../views/Search.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/bookmarks',
     name: 'Bookmarks',
     component: () => import('../views/Bookmarks.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/recipe/:id',
     name: 'RecipeDetail',
     component: () => import('../views/RecipeDetail.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/upload',
     name: 'RecipeUpload',
     component: () => import('../views/RecipeUpload.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '*',
@@ -56,6 +63,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthenticated = await Auth.currentUserInfo()
+
+  if (requiresAuth && !isAuthenticated){
+    next("/login")
+  }
+  else{
+    next()
+  }
 });
 
 export default router;
