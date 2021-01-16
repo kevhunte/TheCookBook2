@@ -40,7 +40,12 @@
             <v-list-item
               v-for="(item, index) in menu_items"
               :key="index"
-              @click="() => item.title === 'Logout' ? Logout() : $router.push(item.link)"
+              @click="() => {
+                if(item.title === 'Logout')
+                    Logout() 
+                else if($route.path !==item.link)
+                    $router.push(item.link)
+                }"
             >
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
