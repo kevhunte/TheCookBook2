@@ -44,6 +44,10 @@
                 @click="handleLogin()"
               >Login</v-btn>
 
+              <div class="mt-3 red--text">
+                {{errormessage}}
+              </div>
+
               <div
                 class="mt-3"
               >
@@ -52,7 +56,7 @@
             </v-container>
           </div>
 
-          <div v-else-if="showSignUp">
+          <div v-else-if="showSignUp && !showConfirmSignUp">
             <v-container fluid>
                 <v-text-field
                   v-model="form.username"
@@ -65,9 +69,19 @@
                   v-model="form.password"
                   :rules="passwordRules"
                   label="Password"
-                  :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="switchPassword"
+                  :type="show1 ? 'text' : 'password'"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="confirmPassword"
+                  :rules="[(v) => v === form.password || 'Passwords do not match']"
+                  label="Confirm Password"
+                  :type="show2 ? 'text' : 'password'"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show2 = !show2"
                   required
                 ></v-text-field>
 
@@ -90,6 +104,10 @@
                 @click="handleSignup()"
               >Sign Up</v-btn>
 
+              <div class="mt-3 red--text">
+                {{errormessage}}
+              </div>
+
               <div
                 class="mt-3"
               >
@@ -97,12 +115,51 @@
               </div>
             </v-container>
           </div>
+
+          <div v-else-if="showSignUp && showConfirmSignUp">
+            <v-container fluid>
+              <h2>Confirm Sign Up. Check your email.</h2>
+
+              <v-spacer/>
+
+                <div 
+                class="mt-6"
+                style="color: #B38A0B"
+                >
+                  <strong>
+                    Username: {{form.username}}
+                  </strong>
+                </div>
+                
+
+                <v-text-field
+                  v-model="form.code"
+                  :rules="[(v) => !!v || 'This field is required']"
+                  label="Code"
+                  required
+                ></v-text-field>
+
+              <v-btn
+                elevation="2"
+                style="background-color: #B38A0B"
+                class="white--text"
+                :disabled="!valid"
+                @click="handleConfirmSignUp()"
+              >Confirm Sign Up</v-btn>
+
+              <div class="mt-3 red--text">
+                {{errormessage}}
+              </div>
+            </v-container>
+
+          </div>
         </v-form>
       </v-card>
   </div>
 </template>
 
 <script lang="ts">
+import router from '@/router';
 import Vue from 'vue'
 import {mapActions} from 'vuex';
 export default Vue.extend({
@@ -113,11 +170,16 @@ export default Vue.extend({
       username: '',
       password: '',
       email: '',
+      code: ''
     },
+    confirmPassword: '',
     errormessage:'',
     valid: false,
     showSignUp: false,
+    showConfirmSignUp: false,
     showPassword: false,
+    show1: false,
+    show2: false,
     fieldMaxLen: 30,
     fieldRules: [
         (v: string) => !!v || 'This field is required'
@@ -133,22 +195,64 @@ export default Vue.extend({
     passwordRules: [
         (v: string) => !!v || 'This field is required',
         (v: string) => v.length >= 8 || 'Password must be equal to or greater than 8 characters',
-        (v: string) => /\W|_/g.test(v) || 'Password must have a special character',
-        (v: string) => /\d|_/g.test(v) || 'Password must have a number'
+        (v: string) => /\d|_/g.test(v) || 'Password must have a number',
+        (v: string) => /\W|_/g.test(v) || 'Password must have a special character'
     ]
   }),
   methods: {
-    ...mapActions("auth",["login","signUp"]),
-    handleLogin(){
+    ...mapActions("auth",["login","signUp","confirmSignUp"]),
+    async handleLogin(){
       if(this.valid){
         console.log('handling login');
-        //this.login(this.form.username, this.form.password)
+
+        try{
+          await this.login({
+            username: this.form.username, 
+            password: this.form.password
+            });
+        }
+        catch(error){
+          this.errormessage = `Error: ${error.message}`;
+        }
+        
       }
     },
-    handleSignup(){
+    async handleSignup(){
       if(this.valid){
         console.log('handling signup');
-        //this.signUp(this.form.username,this.form.password,this.form.email)
+
+        try {
+          await this.signUp({
+            username: this.form.username,
+            password: this.form.password,
+            email: this.form.email
+          });
+
+          this.showConfirmSignUp = true
+        } 
+        catch (error) {
+          this.errormessage = `Error: ${error.message}`
+        }
+      }
+    },
+    async handleConfirmSignUp(){
+      if(this.valid){
+        try {
+          await this.confirmSignUp({
+            username: this.form.username,
+            code: this.form.code
+          });
+          // sign in after confirmation
+          await this.login({
+            username: this.form.username,
+            password: this.form.password
+          })
+          // push to return URL
+          const url = this.$route.query.redirect
+          url ? router.push(`${url}`) : router.push('/')
+        } catch (error) {
+          this.errormessage = `Error: ${error.message}`
+        }
       }
     },
     reset () {
@@ -156,8 +260,13 @@ export default Vue.extend({
           username: '',
           password: '',
           email: '',
+          code: ''
         }
         this.showPassword = false
+        this.show1 = false
+        this.show2 = false
+        this.confirmPassword = ''
+        this.errormessage = ''
         
         var refForm: any = this.$refs.registerForm;
 
@@ -175,9 +284,5 @@ export default Vue.extend({
 </script>
 <style scoped>
 
-/* .formStyle {
-  max-width: 50%;
-  margin: auto;
-} */
 
 </style>
