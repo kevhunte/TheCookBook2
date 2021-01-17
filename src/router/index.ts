@@ -70,7 +70,12 @@ router.beforeEach(async (to, from, next) => {
   const isAuthenticated = await Auth.currentUserInfo()
 
   if (requiresAuth && !isAuthenticated){
-    next("/login")
+    next({
+      path:"/login",
+      query: {
+        redirect: to.fullPath
+      }
+    })
   }
   else{
     next()
