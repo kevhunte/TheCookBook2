@@ -209,7 +209,10 @@ export default Vue.extend({
           await this.login({
             username: this.form.username, 
             password: this.form.password
-            });
+          });
+          // push to return URL
+          const url = this.$route.query.redirect
+          url ? router.push(`${url}`) : router.push('/')
         }
         catch(error){
           this.errormessage = `Error: ${error.message}`;

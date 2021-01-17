@@ -26,7 +26,7 @@
 
       <v-menu 
       offset-y
-      :disabled="!$store.getters['auth/user']"
+      :disabled="!user"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-icon 
@@ -45,7 +45,7 @@
               :key="index"
               @click="() => {
                 if(item.title === 'Logout')
-                    logout()
+                    handleLogout()
                 else if($route.path !==item.link)
                     $router.push(item.link)
                 }"
@@ -65,13 +65,10 @@
 <script lang="ts">
 import store from '@/store';
 import Vue from 'vue';
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 export default Vue.extend({
   name: 'NavBar',
-  mounted: () =>{
-    console.log('vals - ', store.getters['auth/user'])
-    
-  },
+  mounted: () =>{},
   data: () => ({
     selectedItem: null,
     menu_items: [
@@ -102,8 +99,17 @@ export default Vue.extend({
       }
     ]
   }),
+  computed:{
+    ...mapGetters({
+      user: "auth/user"
+    })
+  },
   methods: {
-    ...mapActions("auth",["logout"])
+    ...mapActions("auth",["logout"]),
+    async handleLogout(){
+      await this.logout()
+      this.$router.push("/login")
+    }
   }
 });
 </script>

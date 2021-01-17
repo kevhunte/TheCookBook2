@@ -28,7 +28,7 @@ export const auth = {
                 return Promise.resolve("Success")
             }
             catch(e) {
-                console.log("error", e);
+                //console.log("error", e);
                 return Promise.reject(e)
             }
         },
@@ -37,7 +37,7 @@ export const auth = {
                 await Auth.confirmSignUp(username,code)
                 return Promise.resolve()
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return Promise.reject(error)
             }
         },
@@ -51,7 +51,7 @@ export const auth = {
                     }
                 })
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return Promise.reject()
                 
             }
@@ -61,7 +61,7 @@ export const auth = {
             commit("setUser", userInfo)
         }
     },
-    getters :{
-        user: (state: any) => {state.User}
+    getters: {
+        user: (state: any) => state.user
     }
 }
