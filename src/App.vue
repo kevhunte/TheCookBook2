@@ -7,18 +7,22 @@
 
       <router-view />
 
+      <Footer/>
+
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/AppView/NavBar.vue'
+import Footer from '@/components/AppView/Footer.vue'
 import {mapActions} from 'vuex';
 export default Vue.extend({
   name: 'App',
   components: {
-    NavBar
+    NavBar,
+    Footer
   },
   mounted(){
     // persists login info on app load
@@ -43,7 +47,7 @@ export default Vue.extend({
 }
 
 .page{
-  min-height: 1700px;
+  min-height: 500px;
 }
 
 </style>
