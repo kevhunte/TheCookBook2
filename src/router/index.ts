@@ -18,6 +18,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/Login.vue'),
   },
   {
+    path: '/resetpassword',
+    name: 'Reset',
+    component: () => import('../views/ResetPassword.vue'),
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),

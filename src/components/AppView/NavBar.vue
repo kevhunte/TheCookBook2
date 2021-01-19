@@ -20,8 +20,12 @@
 
       <v-spacer/>
 
-      <router-link to="/search" class="link-style">
-        <strong class="white--text">Search</strong>
+      <router-link 
+      v-if="user" 
+      to="/profile" 
+      class="link-style"
+      >
+        <strong class="white--text">{{user.username}}</strong>
       </router-link>
 
       <v-menu 
@@ -76,6 +80,11 @@ export default Vue.extend({
         title: "Profile",
         link: "/profile",
         icon: "mdi-chef-hat"
+      },
+      {
+        title: "Search",
+        link: "/search",
+        icon: "mdi-magnify"
       },
       {
         title: "New Recipe",

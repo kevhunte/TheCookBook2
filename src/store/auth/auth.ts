@@ -52,8 +52,24 @@ export const auth = {
                 })
             } catch (error) {
                 //console.log(error);
-                return Promise.reject()
+                return Promise.reject(error)
                 
+            }
+        },
+        async forgotPassword(_: any,{username}: any){
+            try {
+                await Auth.forgotPassword(username)
+            } 
+            catch (error) {
+                return Promise.reject(error)
+            }
+        },
+        async forgotPasswordSubmit(_:any,{username, code, password}:any){
+            try {
+                await Auth.forgotPasswordSubmit(username,code,password)
+            } 
+            catch (error) {
+                return Promise.reject(error)
             }
         },
         async authAction({commit}:any){

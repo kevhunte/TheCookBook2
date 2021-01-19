@@ -8,6 +8,7 @@
       max-width="500"
       >
         <v-form 
+        @submit.prevent=""
         v-model="valid"
         ref="registerForm"
         class="mr-2 ml-2"
@@ -30,6 +31,17 @@
                   @click:append="switchPassword"
                   required
                 ></v-text-field>
+                <div>
+                  <router-link 
+                  to="/resetpassword"
+                  class=""
+                  >
+                  <p>
+                    Forgot password?
+                  </p>
+                  </router-link>
+                </div>
+                
 
               <v-btn
                 elevation="2"
