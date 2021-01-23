@@ -6,7 +6,7 @@
     <v-container>
       <v-card
         elevation="5"
-        class="my-12 white--text"
+        class="mt-3 mb-12 white--text"
         max-width="374"
         color="#B38A0B"
       >
@@ -42,31 +42,24 @@
 
           <div
           class="my-4 subtitle-1 white--text"
-          >We're everywhere. Any device with access to the Internet brings our app to you. To view how to download our app, view the demo.</div>
+          >We're everywhere. Any device with access to the web brings our app to you. 
+          To download our app, select your device below and follow the guide provided.</div>
         </v-card-text>
         <v-card-actions>
       <v-btn
         color="white"
         text
-      >
-        <a 
         href="#android"
-        class="white--text"
-        >
-          Android
-        </a>
+      >
+        Android
       </v-btn>
 
       <v-btn
         color="white"
         text
-      >
-      <a 
-      href="#iOS"
-      class="white--text"
+        href="#iOS"
       >
         iOS
-      </a>
       </v-btn>
     </v-card-actions>
       </v-card>
