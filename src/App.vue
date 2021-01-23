@@ -38,7 +38,6 @@ export default Vue.extend({
 <style>
 
 * {
-    -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
 

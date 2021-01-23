@@ -8,8 +8,8 @@
         :aspect-ratio="17/22"
         max-width="3rem"
         class=""
-        src="/CookBookLogo.png"
-        lazy-src="/CookBookLogo.png"
+        src="/images/CookBookLogo.png"
+        lazy-src="/images/CookBookLogo.png"
         ></v-img>
 
       <div class="d-flex align-center">

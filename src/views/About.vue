@@ -42,8 +42,8 @@
 
           <div
           class="my-4 subtitle-1 white--text"
-          >We're everywhere. Any device with access to the web brings our app to you. 
-          To download our app, select your device below and follow the guide provided.</div>
+          >We're everywhere. Any device with access to the web brings our site to you. 
+          To download our app, view your device below and follow the guide provided.</div>
         </v-card-text>
         <v-card-actions>
       <v-btn
@@ -88,16 +88,66 @@
       </v-card>
     </v-container>
 
-    <v-container
-    id="android"
-    >
-    How to install mobile app (Android)
-    </v-container>
+      <v-container
+      id="iOS"
+      class="pt-6"
+      >
+        <p
+        class="text-h6"
+        >
+          How to install the iOS mobile app
+        </p>
+        <v-container>
+          <v-row
+          no-gutters
+          justify="center"
+          align="center"
+          >
+            <v-col
+            cols="12"
+            sm="5"
+            >
+            <p>
+              As of January 2021, the only way to install web applications on iOS is by using Safari.
+              If you are not currently doing so, visit our site in the Safari Web Browser. 
+            </p>
+            <p>
+              Click the share option. Something should appear that is similar to the picture shown.
+              Select to Add to Home Screen and select add afterwards.
+            </p>
+            <p>
+              That's all! Now our application will run locally just as any other app on your phone.
+            </p>
+            </v-col>
+            <!-- <v-spacer></v-spacer> -->
+            <v-col
+            cols="12"
+            sm="5"
+            >
+            <v-img
+            max-width="15rem"
+            class="mx-auto my-5"
+            :aspect-ratio="17/22"
+            src="/images/AddToHomeSafari.jpeg"
+            lazy-src="/images/AddToHomeSafari.jpeg"
+            ></v-img>
+            </v-col>
+          </v-row>
+            
+            
+        </v-container>
+      
+      </v-container>
 
-    <v-container
-    id="iOS"
-    >
-    How to install mobile app (iOS)
-    </v-container>
+      <v-container
+      id="android"
+      >
+        <p
+        class="text-h6"
+        >
+        How to install the Android mobile app
+        </p>
+      
+      </v-container>
   </div>
 </template>
