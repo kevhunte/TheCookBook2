@@ -54,6 +54,7 @@
                 class="white--text"
                 :disabled="!valid"
                 @click="handleLogin()"
+                @keypress.enter="handleLogin()"
               >Login</v-btn>
 
               <div class="mt-3 red--text">
@@ -114,6 +115,7 @@
                 class="white--text"
                 :disabled="!valid"
                 @click="handleSignup()"
+                @keypress.enter="handleSignup()"
               >Sign Up</v-btn>
 
               <div class="mt-3 red--text">
@@ -157,6 +159,7 @@
                 class="white--text"
                 :disabled="!valid"
                 @click="handleConfirmSignUp()"
+                @keypress.enter="handleConfirmSignUp()"
               >Confirm Sign Up</v-btn>
 
               <div class="mt-3 red--text">

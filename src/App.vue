@@ -35,7 +35,12 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style>
+
+html{
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -44,6 +49,11 @@ export default Vue.extend({
   text-align: center;
   background-color: wheat;
   padding: 0 1rem
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .page{

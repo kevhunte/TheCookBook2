@@ -14,7 +14,7 @@
 
       <div class="d-flex align-center">
         <router-link to="/" class="link-style">
-        <h2 class="white--text">The CookBook</h2>
+        <h2 class="ml-3 white--text">CookBook</h2>
         </router-link>
       </div>
 
@@ -125,7 +125,4 @@ export default Vue.extend({
 
 <style scoped>
     
-.link-style{
-  text-decoration: none;
-}
 </style>
