@@ -56,7 +56,7 @@ a {
 }
 
 .page{
-  min-height: 500px;
+  min-height: 35em;
 }
 
 </style>

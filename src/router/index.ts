@@ -16,16 +16,19 @@ const routes: Array<RouteConfig> = [
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
+    meta: {}
   },
   {
     path: '/resetpassword',
     name: 'Reset',
     component: () => import('../views/ResetPassword.vue'),
+    meta: {}
   },
   {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),
+    meta: {}
   },
   {
     path: '/search',
@@ -61,6 +64,7 @@ const routes: Array<RouteConfig> = [
     path: '*',
     name: 'NotFound',
     component: () => import('../views/NotFound.vue'),
+    meta: {}
   }
 ];
 

@@ -3,8 +3,11 @@
     <h1>
       Not Found
     </h1>
-    <div>
-      404 page for the site
-    </div>
+    <v-container
+    class="mt-6"
+    >
+      Sorry, we can't find the page you are looking for.
+      <v-icon>mdi-emoticon-sad-outline</v-icon>
+    </v-container>
   </div>
 </template>
