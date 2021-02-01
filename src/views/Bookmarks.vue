@@ -7,7 +7,7 @@
       This page will show the user's bookmarked recipes
     </div>
     <div>
-      This page must therefore be authenticated
+      list of posts connected to the profile instance. Paginate like home, search, and profile
     </div>
   </div>
 </template>

@@ -1,0 +1,52 @@
+# listrecipes with isPublic false  => home
+# listrecipes with isPublic false and other filters => search
+# getRecipe, but don't display if not public. Create bookmarks w/ recipe id and userId => recipe detail
+# create recipe. Then create ingredients, and steps from form. Link to recipe id => recipe upload
+# list recipes with userId equal to user => profile
+# getuser and look through bookmarked items => bookmarks (Test)
+
+type Recipe @model(subscriptions: null)
+ @auth(rules: [{ allow: owner, operations: [create, delete , update]}]){
+  id: ID!
+  name: String
+  userId: ID
+  isPublic: Boolean
+  # add connection to s3 for food pic
+  ingredients: [Ingredient] @connection(keyName: "byRecipe", fields: ["id"])
+  steps: [Step] @connection(keyName: "byRecipe", fields:["id"])
+}
+
+type Ingredient @model(queries: null, subscriptions: null)
+@auth(rules: [{ allow: owner, operations: [create, delete , update] }]) 
+@key(name: "byRecipe", fields: ["recipeID"]) {
+  recipeID: ID!
+  name: String!
+  amount: Int!
+  measurement: String
+  #recipe: Recipe @connection(fields: ["recipeID"])
+}
+
+type Step @model(queries: null, subscriptions: null)
+@auth(rules: [{ allow: owner, operations: [create, delete , update] }]) 
+@key(name: "byRecipe", fields: ["recipeID"]) {
+  recipeID: ID!
+  name: String!
+  content: String!
+  #recipe: Recipe @connection(fields: ["recipeID"])
+}
+
+type BookMark @model(subscriptions: null)
+@auth(rules: [{ allow: owner }])
+@key(name: "bookmarks", fields: ["userId"]) 
+ {
+  id: ID!
+  userId: ID
+  recipeID: ID!
+  recipe: Recipe @connection(fields:["recipeID"])
+}
+
+type User @model(subscriptions: null)
+@auth(rules: [{ allow: owner }]) {
+  id: ID!
+  bookmarked: [BookMark] @connection(keyName:"bookmarks", fields:["id"] ,limit: 10)
+}
