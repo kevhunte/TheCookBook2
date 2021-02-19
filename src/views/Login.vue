@@ -19,6 +19,7 @@
                   v-model="form.username"
                   :rules="fieldRules"
                   label="Username"
+                  name="username"
                   required
                 ></v-text-field>
 
@@ -26,6 +27,7 @@
                   v-model="form.password"
                   :rules="fieldRules"
                   label="Password"
+                  name="password"
                   :type="showPassword ? 'text' : 'password'"
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="switchPassword"

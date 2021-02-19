@@ -1,0 +1,12 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 5
+      arrivalRate: 1
+scenarios:
+    - flow:
+      - log: 'Hitting home'
+      - get:
+          url: '/'
+          expect:
+          - statusCode: 200
